@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
@@ -7,18 +6,16 @@ const path = require('path');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
 
-// Load webhook URL from environment variables
-const webhookUrl = process.env.WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
+const webhookUrl = 'https://discord.com/api/webhooks/1311023760333344788/iUOpM4MW2Idr-nP5XCwPwnee7aVlz_JzhIoYPTqhbv07Ye-HUo8hLoOt4hQigHNZUUKc';
 
 if (!webhookUrl) {
-    console.error("❌ Webhook URL is not defined in environment variables!");
-    process.exit(1); // Exit if no webhook URL is provided
+    console.error("❌ Webhook URL is missing!");
+    process.exit(1); 
 }
 
 app.post('/log', async (req, res) => {
@@ -34,7 +31,6 @@ app.post('/log', async (req, res) => {
                 `⏰ Time: ${new Date().toISOString()}`
         };
 
-        // Send data to Discord webhook
         await fetch(webhookUrl, {
             method: 'POST',
             headers: {
@@ -51,7 +47,6 @@ app.post('/log', async (req, res) => {
     }
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
